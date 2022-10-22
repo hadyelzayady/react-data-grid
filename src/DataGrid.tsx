@@ -44,7 +44,7 @@ import {
   getSelectedCellColSpan,
   renderMeasuringCells,
   scrollIntoView,
-  isCellInSelectionRange as isCellInSelectionRange1D
+  isCellInSelectionRange1D
 } from './utils';
 
 import type {

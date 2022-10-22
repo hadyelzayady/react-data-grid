@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import Cell from './Cell';
 import { RowSelectionProvider, useLatestFunc } from './hooks';
-import { getColSpan, getRowStyle, isCellInSelectionRange } from './utils';
+import { getColSpan, getRowStyle, isCellInSelectionRange1D } from './utils';
 import { rowClassname, rowSelectedClassname } from './style';
 import type { CalculatedColumn, RowRendererProps } from './types';
 
@@ -68,7 +68,7 @@ function Row<R, SR>(
     }
 
     const isCellSelected = selectedCellRangeIdx
-      ? isCellInSelectionRange(idx, selectedCellRangeIdx.startIdx, selectedCellRangeIdx.endIdx)
+      ? isCellInSelectionRange1D(idx, selectedCellRangeIdx.startIdx, selectedCellRangeIdx.endIdx)
       : false;
 
     if (isCellSelected && selectedCellEditor) {
