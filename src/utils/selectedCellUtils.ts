@@ -199,3 +199,9 @@ export function canExitGrid({
 
   return false;
 }
+
+export function isCellInSelectionRange(position: number, start: number, end: number): boolean {
+  if (start <= end) return position >= start && position <= end;
+
+  return position >= end && position <= start;
+}

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import Cell from './Cell';
 import { RowSelectionProvider, useLatestFunc } from './hooks';
-import { getColSpan, getRowStyle } from './utils';
+import { getColSpan, getRowStyle, isCellInSelectionRange } from './utils';
 import { rowClassname, rowSelectedClassname } from './style';
 import type { CalculatedColumn, RowRendererProps } from './types';
 
@@ -15,6 +15,7 @@ function Row<R, SR>(
     gridRowStart,
     height,
     selectedCellIdx,
+    selectedCellRangeIdx,
     isRowSelected,
     copiedCellIdx,
     draggedOverCellIdx,
@@ -29,6 +30,9 @@ function Row<R, SR>(
     setDraggedOverRowIdx,
     onMouseEnter,
     onRowChange,
+    onCellMouseDown,
+    onCellMouseUp,
+    onCellMouseEnter,
     selectCell,
     ...props
   }: RowRendererProps<R, SR>,
@@ -63,7 +67,9 @@ function Row<R, SR>(
       index += colSpan - 1;
     }
 
-    const isCellSelected = selectedCellIdx === idx;
+    const isCellSelected = selectedCellRangeIdx
+      ? isCellInSelectionRange(idx, selectedCellRangeIdx.startIdx, selectedCellRangeIdx.endIdx)
+      : false;
 
     if (isCellSelected && selectedCellEditor) {
       cells.push(selectedCellEditor);
@@ -81,6 +87,21 @@ function Row<R, SR>(
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           onRowChange={handleRowChange}
+          onMouseDownCapture={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onCellMouseDown?.(e,idx);
+          }}
+          onMouseUpCapture={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onCellMouseUp?.(e,idx);
+          }}
+          onMouseEnter={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onCellMouseEnter?.(e,idx);
+          }}
           selectCell={selectCell}
         />
       );

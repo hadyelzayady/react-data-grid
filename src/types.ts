@@ -1,4 +1,4 @@
-import type { Key, ReactElement, ReactNode, RefObject } from 'react';
+import type { Key, MouseEvent, ReactElement, ReactNode, RefObject } from 'react';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -132,6 +132,7 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
   viewportColumns: readonly CalculatedColumn<TRow, TSummaryRow>[];
   row: TRow;
   rowIdx: number;
+  selectedCellRangeIdx: { startIdx: number; endIdx: number } | undefined;
   selectedCellIdx: number | undefined;
   copiedCellIdx: number | undefined;
   draggedOverCellIdx: number | undefined;
@@ -144,6 +145,9 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
   onRowChange: (column: CalculatedColumn<TRow, TSummaryRow>, rowIdx: number, newRow: TRow) => void;
   onRowClick: Maybe<(row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void>;
   onRowDoubleClick: Maybe<(row: TRow, column: CalculatedColumn<TRow, TSummaryRow>) => void>;
+  onCellMouseDown: Maybe<(event: MouseEvent,idx: number) => void>;
+  onCellMouseUp: Maybe<(event: MouseEvent,idx: number) => void>;
+  onCellMouseEnter: Maybe<(event: MouseEvent,idx: number) => void>;
   rowClass: Maybe<(row: TRow) => Maybe<string>>;
   setDraggedOverRowIdx: ((overRowIdx: number) => void) | undefined;
   selectCell: (

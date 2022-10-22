@@ -44,7 +44,8 @@
     "postpublish": "git push --follow-tags origin HEAD"
   },
   "dependencies": {
-    "clsx": "^1.1.1"
+    "clsx": "^1.1.1",
+    "eslint_d": "^12.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -76,11 +77,12 @@
     "babel-plugin-optimize-clsx": "^2.6.2",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
-    "eslint": "^8.14.0",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^27.0.1",
+    "eslint-plugin-jest": "^27.1.3",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-sonarjs": "^0.16.0",
